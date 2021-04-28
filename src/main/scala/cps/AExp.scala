@@ -138,7 +138,11 @@ object CPS {
       case ExprStmt(e) => t_k(e, k)
       
       case EmptyStmt() => k(Void)
-      
+
+      case WhileStmt((cond: Statement), continueStmt)=>  t_k(cond, kmap, k)
+//        val h = (c: KVar) => t_k(breakStmt, b => while(b, t_c(thenPart, kmap, c), t_c(elsePart, kmap, c)))
+//        check_tail(k, h)
+
       case _ => throw new Exception("wrong argument in call to t_k: " + stmt)
     }
   }
